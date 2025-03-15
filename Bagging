@@ -1,0 +1,163 @@
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": 11,
+   "id": "a3ec9bfc-303e-4ac0-961f-88398ba3363a",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "0.7578263841421736\n"
+     ]
+    }
+   ],
+   "source": [
+    "from pandas import read_csv\n",
+    "from sklearn.model_selection import KFold\n",
+    "from sklearn.model_selection import cross_val_score\n",
+    "from sklearn.ensemble import BaggingClassifier\n",
+    "from sklearn.tree import DecisionTreeClassifier\n",
+    "\n",
+    "filename ='pima-indians-diabetes.data.csv'\n",
+    "names=['preg','plas','pres','skin','test','mass','pedi','age','class']\n",
+    "dataframe=read_csv(filename,names=names)\n",
+    "array = dataframe.values\n",
+    "X=array[:,0:8]\n",
+    "Y=array[:,8]\n",
+    "\n",
+    "seed = 7\n",
+    "kfold = KFold(n_splits=10,shuffle=True,random_state=seed)\n",
+    "cart = DecisionTreeClassifier()\n",
+    "num_trees = 100\n",
+    "\n",
+    "model = BaggingClassifier(estimator = cart,n_estimators=num_trees,random_state=seed)\n",
+    "results = cross_val_score(model, X, Y, cv=kfold)\n",
+    "print(results.mean())"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 12,
+   "id": "b8fe35e9-101c-4ae3-83c2-d42c627a5876",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "0.7578263841421736\n"
+     ]
+    }
+   ],
+   "source": [
+    "from pandas import read_csv\n",
+    "from sklearn.model_selection import KFold\n",
+    "from sklearn.model_selection import cross_val_score\n",
+    "from sklearn.ensemble import AddBoostClassifier\n",
+    "\n",
+    "\n",
+    "filename ='pima-indians-diabetes.data.csv'\n",
+    "names=['preg','plas','pres','skin','test','mass','pedi','age','class']\n",
+    "dataframe=read_csv(filename,names=names)\n",
+    "array = dataframe.values\n",
+    "\n",
+    "X=array[:,0:8]\n",
+    "Y=array[:,8]\n",
+    "\n",
+    "num_trees = 10\n",
+    "seed = 7\n",
+    "kfold = KFold(n_splits=10,shuffle=True,random_state=seed)\n",
+    "cart = DecisionTreeClassifier()\n",
+    "num_trees = 100\n",
+    "\n",
+    "model = BaggingClassifier(estimator = cart,n_estimators=num_trees,random_state=seed)\n",
+    "results = cross_val_score(model, X, Y, cv=kfold)\n",
+    "print(results.mean())"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 16,
+   "id": "87396339-de6a-48f5-8a2f-c55d147c246a",
+   "metadata": {},
+   "outputs": [
+    {
+     "ename": "ImportError",
+     "evalue": "cannot import name 'DecisionTreeClassifer' from 'sklearn.tree' (C:\\ProgramData\\anaconda3\\Lib\\site-packages\\sklearn\\tree\\__init__.py)",
+     "output_type": "error",
+     "traceback": [
+      "\u001b[1;31m---------------------------------------------------------------------------\u001b[0m",
+      "\u001b[1;31mImportError\u001b[0m                               Traceback (most recent call last)",
+      "Cell \u001b[1;32mIn[16], line 7\u001b[0m\n\u001b[0;32m      5\u001b[0m \u001b[38;5;28;01mfrom\u001b[39;00m \u001b[38;5;21;01msklearn\u001b[39;00m\u001b[38;5;21;01m.\u001b[39;00m\u001b[38;5;21;01mmodel_selection\u001b[39;00m \u001b[38;5;28;01mimport\u001b[39;00m cross_val_score\n\u001b[0;32m      6\u001b[0m \u001b[38;5;28;01mfrom\u001b[39;00m \u001b[38;5;21;01msklearn\u001b[39;00m\u001b[38;5;21;01m.\u001b[39;00m\u001b[38;5;21;01mlinear_model\u001b[39;00m \u001b[38;5;28;01mimport\u001b[39;00m LogisticRegression\n\u001b[1;32m----> 7\u001b[0m \u001b[38;5;28;01mfrom\u001b[39;00m \u001b[38;5;21;01msklearn\u001b[39;00m\u001b[38;5;21;01m.\u001b[39;00m\u001b[38;5;21;01mtree\u001b[39;00m \u001b[38;5;28;01mimport\u001b[39;00m DecisionTreeClassifer\n\u001b[0;32m      8\u001b[0m \u001b[38;5;28;01mfrom\u001b[39;00m \u001b[38;5;21;01msklearn\u001b[39;00m\u001b[38;5;21;01m.\u001b[39;00m\u001b[38;5;21;01msvm\u001b[39;00m \u001b[38;5;28;01mimport\u001b[39;00m SVC\n\u001b[0;32m      9\u001b[0m \u001b[38;5;28;01mfrom\u001b[39;00m \u001b[38;5;21;01msklearn\u001b[39;00m\u001b[38;5;21;01m.\u001b[39;00m\u001b[38;5;21;01mensemble\u001b[39;00m \u001b[38;5;28;01mimport\u001b[39;00m VotingClassifer\n",
+      "\u001b[1;31mImportError\u001b[0m: cannot import name 'DecisionTreeClassifer' from 'sklearn.tree' (C:\\ProgramData\\anaconda3\\Lib\\site-packages\\sklearn\\tree\\__init__.py)"
+     ]
+    }
+   ],
+   "source": [
+    "## Stacking Ensemble for Classification\n",
+    "\n",
+    "from pandas import read_csv\n",
+    "from sklearn.model_selection import KFold\n",
+    "from sklearn.model_selection import cross_val_score\n",
+    "from sklearn.linear_model import LogisticRegression\n",
+    "from sklearn.tree import DecisionTreeClassifer\n",
+    "from sklearn.svm import SVC\n",
+    "from sklearn.ensemble import VotingClassifer\n",
+    "filename ='pima-indians-diabetes.data.csv'\n",
+    "names=['preg','plas','pres','skin','test','mass','pedi','age','class']\n",
+    "dataframe=read_csv(filename,names=names)\n",
+    "array = dataframe.values\n",
+    "X=array[:,0:8]\n",
+    "Y=array[:,8]\n",
+    "num_trees = 10\n",
+    "seed = 7\n",
+    "kfold = KFold(n_splits=10,shuffle=True,random_state=7)\n",
+    "\n",
+    "estimators = []\n",
+    "model1 = LogisticRegression(max_iter=500)\n",
+    "estimators.append(('logstic',model1))\n",
+    "model1 = DecisionTreeClassifier()\n",
+    "estimators.append(('cart',model2))\n",
+    "model3 = SVC()\n",
+    "estimators.append(('svm',model3))\n",
+    "\n",
+    "\n",
+    "ensemble =VotingClassifier(estimators)\n",
+    "results = cross_val_score(model, X, Y, cv=kfold)\n",
+    "print(results.mean())"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "093ce7a5-47ef-4eaa-8b68-8f79c4c3e579",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3 (ipykernel)",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.12.7"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}
